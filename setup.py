@@ -4,7 +4,7 @@
 
 import setuptools
 
-name = 'skeleton'
+name = 'freedompop'
 description = ''
 nspkg_technique = 'native'
 """
@@ -25,8 +25,11 @@ params = dict(
 		name.split('.')[:-1] if nspkg_technique == 'managed'
 		else []
 	),
-	python_requires='>=2.7',
+	python_requires='>=3.6',
 	install_requires=[
+		'autocommand',
+		'requests_toolbelt',
+		'tempora',
 	],
 	extras_require={
 		'testing': [

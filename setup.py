@@ -30,6 +30,7 @@ params = dict(
 		'autocommand',
 		'requests_toolbelt',
 		'tempora',
+		'jaraco.functools',
 	],
 	extras_require={
 		'testing': [

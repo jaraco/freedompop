@@ -1,13 +1,16 @@
 import os
 import datetime
 
+import jaraco.functools
 from tempora import utc
 from requests_toolbelt import sessions
 
 
 class Error(Exception):
 	@classmethod
-	def raise_for_resp(cls, data):
+	def raise_for_resp(cls, resp):
+		resp.raise_for_status()
+		data = resp.json()
 		if 'error' in data:
 			raise cls(data['error_description'])
 		return data
@@ -42,7 +45,7 @@ class Client:
 			grant_type='refresh_token',
 			refresh_token=self.refresh_token,
 		)
-		return self._session.post('/auth/token', params=params).json()
+		return self._session.post('/auth/token', params=params)
 
 	def _acquire_token(self):
 		params = dict(
@@ -50,12 +53,30 @@ class Client:
 			username=os.environ['FREEDOMPOP_USERNAME'],
 			password=os.environ['FREEDOMPOP_PASSWORD'],
 		)
-		return self._session.post('/auth/token', params=params).json()
+		return self._session.post('/auth/token', params=params)
+
+	@jaraco.functools.method_cache
+	def _register_push_token(self):
+		params = dict(
+			deviceId='1234567899',
+			deviceSid='8144701821',
+			deviceType='FPOP_BYOD',
+			radioType='PHONE_TYPE_GSM',
+			pushToken='1234567890',
+			accessToken=self.access_token,
+		)
+		return Error.raise_for_resp(
+			self._session.get('/phone/push/register/token', params=params),
+		)
 
 	@property
 	def session(self):
 		self._update_token()
+		# self._register_push_token()
 		return self._session
 
 	def get_phone_account_info(self):
-		return self.session.get('/phone/account/info').json()
+		return Error.raise_for_resp(self.session.get('/phone/account/info'))
+
+	def get_user_usage(self):
+		return Error.raise_for_resp(self.session.post('/user/usage'))

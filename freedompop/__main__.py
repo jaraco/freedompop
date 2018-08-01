@@ -7,4 +7,6 @@ import freedompop
 
 @autocommand.autocommand(__name__)
 def main(command):
-	pprint.pprint(freedompop.Client().get_phone_account_info())
+	import logging
+	logging.basicConfig(level=logging.DEBUG)
+	pprint.pprint(freedompop.Client().get_user_usage())

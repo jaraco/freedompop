@@ -7,6 +7,7 @@ import freedompop
 
 @autocommand.autocommand(__name__)
 def main(command):
-	import logging
-	logging.basicConfig(level=logging.DEBUG)
-	pprint.pprint(freedompop.Client().get_user_info())
+	method_name = command.replace('-', '_').replace(' ', '_')
+	client = freedompop.Client()
+	method = getattr(client, method_name)
+	pprint.pprint(method())

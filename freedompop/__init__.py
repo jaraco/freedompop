@@ -64,11 +64,11 @@ class Client:
 	@jaraco.functools.method_cache
 	def _register_push_token(self):
 		params = dict(
-			deviceId='1234567899',
-			deviceSid='8144701821',
-			deviceType='FPOP_BYOD',
-			radioType='PHONE_TYPE_GSM',
-			pushToken='1234567890',
+			deviceId=os.environ['FREEDOMPOP_DEVICE_ID'],
+			deviceSid=os.environ['FREEDOMPOP_DEVICE_SID'],
+			deviceType=os.environ['FREEDOMPOP_DEVICE_TYPE'],
+			radioType=os.environ['FREEDOMPOP_RADIO_TYPE'],
+			pushToken=os.environ['FREEDOMPOP_PUSH_TOKEN'],
 		)
 		self.get('/phone/push/register/token', params=params),
 

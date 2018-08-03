@@ -1,13 +1,13 @@
-.. image:: https://img.shields.io/pypi/v/skeleton.svg
-   :target: https://pypi.org/project/skeleton
+.. image:: https://img.shields.io/pypi/v/freedompop.svg
+   :target: https://pypi.org/project/freedompop
 
-.. image:: https://img.shields.io/pypi/pyversions/skeleton.svg
+.. image:: https://img.shields.io/pypi/pyversions/freedompop.svg
 
-.. image:: https://img.shields.io/travis/jaraco/skeleton/master.svg
-   :target: https://travis-ci.org/jaraco/skeleton
+.. image:: https://img.shields.io/travis/jaraco/freedompop/master.svg
+   :target: https://travis-ci.org/jaraco/freedompop
 
-.. .. image:: https://img.shields.io/appveyor/ci/jaraco/skeleton/master.svg
-..    :target: https://ci.appveyor.com/project/jaraco/skeleton/branch/master
+.. .. image:: https://img.shields.io/appveyor/ci/jaraco/freedompop/master.svg
+..    :target: https://ci.appveyor.com/project/jaraco/freedompop/branch/master
 
-.. .. image:: https://readthedocs.org/projects/skeleton/badge/?version=latest
-..    :target: https://skeleton.readthedocs.io/en/latest/?badge=latest
+.. .. image:: https://readthedocs.org/projects/freedompop/badge/?version=latest
+..    :target: https://freedompop.readthedocs.io/en/latest/?badge=latest

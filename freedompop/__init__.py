@@ -26,6 +26,9 @@ class Client:
 	_session.headers['User-Agent'] = (
 		'Dalvik/2.1.0 (Linux; U; Android 7.1.1; Nokia 2 Build/NMF26F)'
 	)
+	_session.params.update(
+		appIdVersion=os.environ['FREEDOMPOP_APP_VERSION'],
+	)
 
 	def _update_token(self):
 		if self._token_current():
@@ -33,7 +36,7 @@ class Client:
 
 		vars(self).update(
 			Error.raise_for_resp(self._refresh_token() or self._acquire_token()))
-		self._session.params = dict(accessToken=self.access_token)
+		self._session.params.update(accessToken=self.access_token)
 		self.token_acquired = utc.now()
 
 	def _token_current(self):
@@ -84,11 +87,6 @@ class Client:
 	def get(self):
 		return compose(Error.raise_for_resp, self.session.get)
 
-	@property
-	def id_get(self):
-		params = dict(appIdVersion=os.environ['FREEDOMPOP_APP_VERSION'])
-		return functools.partial(self.get, params=params)
-
 	def get_phone_account_info(self):
 		return self.get('/phone/account/info')
 
@@ -96,7 +94,7 @@ class Client:
 		return self.get('/user/info')
 
 	def get_balance(self):
-		return self.id_get('/phone/balance')
+		return self.get('/phone/balance')
 
 	def list_sms(self):
-		return self.id_get('/phone/listsms')
+		return self.get('/phone/listsms')

@@ -21,7 +21,6 @@ class Client:
 	username = os.environ['FREEDOMPOP_API_USERNAME']
 	password = os.environ['FREEDOMPOP_API_PASSWORD']
 	_session.auth = username, password
-	_session.params = dict(appIdVersion=os.environ['FREEDOMPOP_APP_VERSION'])
 	_session.headers['User-Agent'] = (
 		'Dalvik/2.1.0 (Linux; U; Android 7.1.1; Nokia 2 Build/NMF26F)'
 	)
@@ -84,3 +83,11 @@ class Client:
 
 	def get_user_info(self):
 		return Error.raise_for_resp(self.session.get('/user/info'))
+
+	def get_balance(self):
+		params = dict(appIdVersion=os.environ['FREEDOMPOP_APP_VERSION'])
+		return Error.raise_for_resp(self.session.get('/phone/balance', params=params))
+
+	def list_sms(self):
+		params = dict(appIdVersion=os.environ['FREEDOMPOP_APP_VERSION'])
+		return Error.raise_for_resp(self.session.get('/phone/listsms', params=params))

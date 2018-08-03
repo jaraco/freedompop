@@ -76,7 +76,7 @@ For other applications, it's possible to construct and invoke the API
 programmatically::
 
     >>> import freedompop
-    >>> client = freedompop.Client()
+    >>> client = freedompop.Client.from_env()
     >>> client.get_phone_account_info()
     {...}
 

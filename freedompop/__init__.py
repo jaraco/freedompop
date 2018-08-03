@@ -85,13 +85,13 @@ class Client:
 		)
 
 	def get_phone_account_info(self):
-		return self.get('/phone/account/info')
+		return self.get('phone/account/info')
 
 	def get_user_info(self):
-		return self.get('/user/info')
+		return self.get('user/info')
 
 	def get_balance(self):
-		return self.get('/phone/balance')
+		return self.get('phone/balance')
 
 	def list_sms(self):
-		return self.get('/phone/listsms')
+		return self.get('phone/listsms')

@@ -83,4 +83,4 @@ class Client:
 		return Error.raise_for_resp(self.session.get('/phone/account/info'))
 
 	def get_user_info(self):
-		return Error.raise_for_resp(self.session.post('/user/info'))
+		return Error.raise_for_resp(self.session.get('/user/info'))

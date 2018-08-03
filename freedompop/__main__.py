@@ -9,4 +9,4 @@ import freedompop
 def main(command):
 	import logging
 	logging.basicConfig(level=logging.DEBUG)
-	pprint.pprint(freedompop.Client().get_user_usage())
+	pprint.pprint(freedompop.Client().get_user_info())

@@ -61,7 +61,6 @@ class Client:
 		)
 		return self.session.post('/auth/token', params=params)
 
-	@jaraco.functools.method_cache
 	def _register_push_token(self):
 		params = dict(
 			deviceId=os.environ['FREEDOMPOP_DEVICE_ID'],

@@ -17,16 +17,40 @@ class Error(Exception):
 
 
 class Client:
-	session = sessions.BaseUrlSession('https://api.freedompop.com')
-	username = os.environ['FREEDOMPOP_API_USERNAME']
-	password = os.environ['FREEDOMPOP_API_PASSWORD']
-	session.auth = username, password
-	session.headers['User-Agent'] = (
-		'Dalvik/2.1.0 (Linux; U; Android 7.1.1; Nokia 2 Build/NMF26F)'
-	)
-	session.params.update(
-		appIdVersion=os.environ['FREEDOMPOP_APP_VERSION'],
-	)
+
+	@classmethod
+	def from_env(cls):
+		api_cred = (
+			os.environ['FREEDOMPOP_API_USERNAME'],
+			os.environ['FREEDOMPOP_API_PASSWORD'],
+		)
+		user_cred = (
+			os.environ['FREEDOMPOP_USERNAME'],
+			os.environ['FREEDOMPOP_PASSWORD'],
+		)
+		app_version = os.environ['FREEDOMPOP_APP_VERSION']
+		device_info = dict(
+			deviceId=os.environ.get('FREEDOMPOP_DEVICE_ID'),
+			deviceSid=os.environ.get('FREEDOMPOP_DEVICE_SID'),
+			deviceType=os.environ.get('FREEDOMPOP_DEVICE_TYPE'),
+			radioType=os.environ.get('FREEDOMPOP_RADIO_TYPE'),
+			pushToken=os.environ.get('FREEDOMPOP_PUSH_TOKEN'),
+		)
+		return cls(api_cred, user_cred, app_version, device_info)
+
+	def __init__(self, api_cred, user_cred, app_version, device_info=None):
+		self.session = self._build_session()
+		self.session.params.update(appIdVersion=app_version)
+		self.session.auth = api_cred
+		self.user_cred = user_cred
+
+	@staticmethod
+	def _build_session():
+		session = sessions.BaseUrlSession('https://api.freedompop.com')
+		session.headers['User-Agent'] = (
+			'Dalvik/2.1.0 (Linux; U; Android 7.1.1; Nokia 2 Build/NMF26F)'
+		)
+		return session
 
 	def _update_token(self):
 		if self._token_current():
@@ -54,22 +78,16 @@ class Client:
 		return self.session.post('/auth/token', params=params)
 
 	def _acquire_token(self):
+		username, password = self.user_cred
 		params = dict(
 			grant_type='password',
-			username=os.environ['FREEDOMPOP_USERNAME'],
-			password=os.environ['FREEDOMPOP_PASSWORD'],
+			username=username,
+			password=password,
 		)
 		return self.session.post('/auth/token', params=params)
 
 	def _register_push_token(self):
-		params = dict(
-			deviceId=os.environ['FREEDOMPOP_DEVICE_ID'],
-			deviceSid=os.environ['FREEDOMPOP_DEVICE_SID'],
-			deviceType=os.environ['FREEDOMPOP_DEVICE_TYPE'],
-			radioType=os.environ['FREEDOMPOP_RADIO_TYPE'],
-			pushToken=os.environ['FREEDOMPOP_PUSH_TOKEN'],
-		)
-		self.get('/phone/push/register/token', params=params),
+		self.get('/phone/push/register/token', params=self.device_info),
 
 	def __getattr__(self, name):
 		"""

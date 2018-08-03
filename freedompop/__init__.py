@@ -21,6 +21,10 @@ class Client:
 	username = os.environ['FREEDOMPOP_API_USERNAME']
 	password = os.environ['FREEDOMPOP_API_PASSWORD']
 	_session.auth = username, password
+	_session.params = dict(appIdVersion=os.environ['FREEDOMPOP_APP_VERSION'])
+	_session.headers['User-Agent'] = (
+		'Dalvik/2.1.0 (Linux; U; Android 7.1.1; Nokia 2 Build/NMF26F)'
+	)
 
 	def _update_token(self):
 		if self._token_current():
@@ -78,5 +82,5 @@ class Client:
 	def get_phone_account_info(self):
 		return Error.raise_for_resp(self.session.get('/phone/account/info'))
 
-	def get_user_usage(self):
-		return Error.raise_for_resp(self.session.post('/user/usage'))
+	def get_user_info(self):
+		return Error.raise_for_resp(self.session.post('/user/info'))

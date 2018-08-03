@@ -1,7 +1,9 @@
 import os
 import datetime
+import functools
 
 import jaraco.functools
+from jaraco.functools import compose
 from tempora import utc
 from requests_toolbelt import sessions
 
@@ -78,16 +80,23 @@ class Client:
 		# self._register_push_token()
 		return self._session
 
+	@property
+	def get(self):
+		return compose(Error.raise_for_resp, self.session.get)
+
+	@property
+	def id_get(self):
+		params = dict(appIdVersion=os.environ['FREEDOMPOP_APP_VERSION'])
+		return functools.partial(self.get, params=params)
+
 	def get_phone_account_info(self):
-		return Error.raise_for_resp(self.session.get('/phone/account/info'))
+		return self.get('/phone/account/info')
 
 	def get_user_info(self):
-		return Error.raise_for_resp(self.session.get('/user/info'))
+		return self.get('/user/info')
 
 	def get_balance(self):
-		params = dict(appIdVersion=os.environ['FREEDOMPOP_APP_VERSION'])
-		return Error.raise_for_resp(self.session.get('/phone/balance', params=params))
+		return self.id_get('/phone/balance')
 
 	def list_sms(self):
-		params = dict(appIdVersion=os.environ['FREEDOMPOP_APP_VERSION'])
-		return Error.raise_for_resp(self.session.get('/phone/listsms', params=params))
+		return self.id_get('/phone/listsms')

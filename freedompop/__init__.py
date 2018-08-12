@@ -104,6 +104,14 @@ class Client:
 			jaraco.functools.first_invoke(self._update_token, method),
 		)
 
+	def get_sip_config(self):
+		params = dict(
+			deviceId=self.device_info['deviceId'],
+			deviceSid=self.device_info['deviceSid'],
+			radioType=self.device_info['radioType'],
+		)
+		return self.get('phone/device/config', params=params)
+
 	def get_phone_account_info(self):
 		return self.get('phone/account/info')
 

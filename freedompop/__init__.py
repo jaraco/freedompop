@@ -112,3 +112,24 @@ class Client:
 
 	def list_sms(self):
 		return self.get('phone/listsms')
+
+	def get_phone_market(self):
+		return self.get('phone/market')
+
+	def get_usage(self):
+		return self.get('user/usage')
+
+	def list_calls(self):
+		return self.get('phone/calls')
+
+	def send_sms(self, **params):
+		assert 'to_numbers' in params
+		assert 'message_body' in params
+		return self.post('phone/sendsms', data=params)
+
+	def get_incoming_call_pref(self):
+		return self.get('phone/getincomingcallpref')
+
+	def set_incoming_call_pref(self, **params):
+		# params should be like usePV=1
+		return self.put('phone/setincomingcallpref', params=params)

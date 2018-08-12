@@ -43,7 +43,7 @@ class Client:
 	def __init__(self, api_cred, user_cred, app_version, device_info=None):
 		self.session = self._build_session()
 		self.session.params.update(appIdVersion=app_version)
-		self.session.auth = api_cred
+		self.session.auth = tuple(api_cred)
 		self.user_cred = user_cred
 		self.device_info = device_info
 

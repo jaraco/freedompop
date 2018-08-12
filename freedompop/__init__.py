@@ -36,6 +36,8 @@ class Client:
 			radioType=os.environ.get('FREEDOMPOP_RADIO_TYPE'),
 			pushToken=os.environ.get('FREEDOMPOP_PUSH_TOKEN'),
 		)
+		if not any(device_info.values()):
+			device_info = None
 		return cls(api_cred, user_cred, app_version, device_info)
 
 	def __init__(self, api_cred, user_cred, app_version, device_info=None):
@@ -43,6 +45,7 @@ class Client:
 		self.session.params.update(appIdVersion=app_version)
 		self.session.auth = api_cred
 		self.user_cred = user_cred
+		self.device_info = device_info
 
 	@staticmethod
 	def _build_session():

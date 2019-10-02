@@ -6,6 +6,10 @@
 .. image:: https://img.shields.io/travis/jaraco/freedompop/master.svg
    :target: https://travis-ci.org/jaraco/freedompop
 
+.. image:: https://img.shields.io/badge/code%20style-black-000000.svg
+   :target: https://github.com/ambv/black
+   :alt: Code style: Black
+
 .. .. image:: https://img.shields.io/appveyor/ci/jaraco/freedompop/master.svg
 ..    :target: https://ci.appveyor.com/project/jaraco/freedompop/branch/master
 

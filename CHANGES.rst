@@ -1,3 +1,8 @@
+v1.1.1
+======
+
+Refresh project packaging.
+
 v1.1.0
 ======
 

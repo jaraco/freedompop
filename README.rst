@@ -1,20 +1,21 @@
 .. image:: https://img.shields.io/pypi/v/freedompop.svg
-   :target: https://pypi.org/project/freedompop
+   :target: `PyPI link`_
 
 .. image:: https://img.shields.io/pypi/pyversions/freedompop.svg
+   :target: `PyPI link`_
 
-.. image:: https://img.shields.io/travis/jaraco/freedompop/master.svg
-   :target: https://travis-ci.org/jaraco/freedompop
+.. _PyPI link: https://pypi.org/project/freedompop
+
+.. image:: https://github.com/jaraco/freedompop/workflows/Automated%20Tests/badge.svg
+   :target: https://github.com/jaraco/freedompop/actions?query=workflow%3A%22Automated+Tests%22
+   :alt: Automated Tests
 
 .. image:: https://img.shields.io/badge/code%20style-black-000000.svg
-   :target: https://github.com/ambv/black
+   :target: https://github.com/psf/black
    :alt: Code style: Black
 
-.. .. image:: https://img.shields.io/appveyor/ci/jaraco/freedompop/master.svg
-..    :target: https://ci.appveyor.com/project/jaraco/freedompop/branch/master
-
-.. .. image:: https://readthedocs.org/projects/freedompop/badge/?version=latest
-..    :target: https://freedompop.readthedocs.io/en/latest/?badge=latest
+.. .. image:: https://readthedocs.org/projects/skeleton/badge/?version=latest
+..    :target: https://skeleton.readthedocs.io/en/latest/?badge=latest
 
 
 Unofficial FreedomPop Client library, inspired by

@@ -7,7 +7,7 @@ Welcome to |project| documentation!
    history
 
 
-.. automodule:: PROJECT
+.. automodule:: freedompop
     :members:
     :undoc-members:
     :show-inheritance:

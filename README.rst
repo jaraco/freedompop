@@ -3,7 +3,7 @@
 
 .. image:: https://img.shields.io/pypi/pyversions/freedompop.svg
 
-.. image:: https://github.com/jaraco/freedompop/workflows/tests/badge.svg
+.. image:: https://github.com/jaraco/freedompop/actions/workflows/main.yml/badge.svg
    :target: https://github.com/jaraco/freedompop/actions?query=workflow%3A%22tests%22
    :alt: tests
 

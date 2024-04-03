@@ -49,9 +49,9 @@ class Client:
     @staticmethod
     def _build_session():
         session = sessions.BaseUrlSession('https://api.freedompop.com')
-        session.headers[
-            'User-Agent'
-        ] = 'Dalvik/2.1.0 (Linux; U; Android 7.1.1; Nokia 2 Build/NMF26F)'
+        session.headers['User-Agent'] = (
+            'Dalvik/2.1.0 (Linux; U; Android 7.1.1; Nokia 2 Build/NMF26F)'
+        )
         return session
 
     def _update_token(self):
@@ -83,7 +83,7 @@ class Client:
         return self.session.post('/auth/token', params=params)
 
     def _register_push_token(self):
-        self.get('/phone/push/register/token', params=self.device_info),
+        (self.get('/phone/push/register/token', params=self.device_info),)
 
     def __getattr__(self, name):
         """

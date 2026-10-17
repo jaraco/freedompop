@@ -1,9 +1,9 @@
-import os
 import datetime
+import os
 
 import jaraco.functools
-from tempora import utc
 from requests_toolbelt import sessions
+from tempora import utc
 
 
 class Error(Exception):
